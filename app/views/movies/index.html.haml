@@ -1,15 +1,20 @@
 -# in app/views/movies/show.html.haml
 
 %h1 All Movies
-
+= form_tag movies_path, :method => :get, :id => :ratings_form do
+  Include:
+  - @all_ratings.each do |rating|
+    = rating.rating
+    = check_box_tag "ratings[#{rating.rating}]",1,true
+  = submit_tag 'Refresh', id: 'ratings_submit'
 %table#movies
   %thead
     %tr
       %th
-        %a{:href => '/movies/title_sort', :id => 'title_header'}Movie Title
+        %a{:href => '/movies/sort/title', :id => 'title_header'}Movie Title
       %th Rating
       %th 
-        %a{:href => '/movies/date_sort', :id => 'release_date_header'}Release Date
+        %a{:href => '/movies/sort/date', :id => 'release_date_header'}Release Date
       %th More Info
   %tbody
     - @movies.each do |movie|

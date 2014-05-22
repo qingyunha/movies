@@ -5,9 +5,25 @@ class MoviesController < ApplicationController
     @movie = Movie.find(id) # look up movie by unique ID
     # will render app/views/movies/show.<extension> by default
   end
-
+  
   def index
     @movies = Movie.all
+  	session[:p] = params[:p] if params[:p]
+  	session[:ratings] = params[:ratings] if params[:ratings]
+  	if session[:p]
+  	  if session[:p] == 'title'
+  		  @movies = Movie.order :title
+  	  else session[:p] == 'date'
+        @movies = Movie.order :release_date
+      end
+    end
+          
+    
+    if session[:ratings]
+    	@movies = @movies.select {|e| session[:ratings].include? e.rating}
+    end
+      @all_ratings = Movie.select(:rating).uniq
+     
   end
 
   def new
