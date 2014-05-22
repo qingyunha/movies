@@ -38,4 +38,12 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
+  def title_sort
+    @movies = Movie.order :title
+  end
+  
+  def date_sort
+  	@movies = Movie.order :release_date
+  end
+  
 end

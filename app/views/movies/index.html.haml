@@ -1,12 +1,15 @@
--#  This file is app/views/movies/index.html.haml
+-# in app/views/movies/show.html.haml
+
 %h1 All Movies
 
 %table#movies
   %thead
     %tr
-      %th Movie Title
+      %th
+        %a{:href => '/movies/title_sort', :id => 'title_header'}Movie Title
       %th Rating
-      %th Release Date
+      %th 
+        %a{:href => '/movies/date_sort', :id => 'release_date_header'}Release Date
       %th More Info
   %tbody
     - @movies.each do |movie|

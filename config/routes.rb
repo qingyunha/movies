@@ -9,11 +9,13 @@ Rottenpotatoes::Application.routes.draw do
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
-
+  match '/movies/title_sort' => 'movies#title_sort'
+  match 'movies/date_sort' => 'movies#date_sort'
+  match '/' => 'movies#index'
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :movies
-
+  
   # Sample resource route with options:
   #   resources :products do
   #     member do
@@ -50,7 +52,6 @@ Rottenpotatoes::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
-
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
