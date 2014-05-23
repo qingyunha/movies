@@ -8,21 +8,27 @@ class MoviesController < ApplicationController
   
   def index
     @movies = Movie.all
+    @title = 'no'
+    @date = 'no'
   	session[:p] = params[:p] if params[:p]
   	session[:ratings] = params[:ratings] if params[:ratings]
   	if session[:p]
   	  if session[:p] == 'title'
-  		  @movies = Movie.order :title
+  	    @title = 'hilite'
+  	    @movies = Movie.order :title
   	  else session[:p] == 'date'
+  	    @date = 'hilite'
         @movies = Movie.order :release_date
       end
     end
           
-    
+    @all_ratings = Movie.select(:rating).uniq    
     if session[:ratings]
-    	@movies = @movies.select {|e| session[:ratings].include? e.rating}
+      @movies = @movies.select {|e| session[:ratings].include? e.rating}
+      @ratings = session[:ratings]
+    else
+      @ratings = @all_ratings.collect {|e| e.rating}
     end
-      @all_ratings = Movie.select(:rating).uniq
      
   end
 

@@ -5,15 +5,15 @@
   Include:
   - @all_ratings.each do |rating|
     = rating.rating
-    = check_box_tag "ratings[#{rating.rating}]",1,true
+    = check_box_tag "ratings[#{rating.rating}]",1, @ratings.include?(rating.rating)
   = submit_tag 'Refresh', id: 'ratings_submit'
 %table#movies
   %thead
     %tr
-      %th
+      %th{:class => @title}
         %a{:href => '/movies/sort/title', :id => 'title_header'}Movie Title
       %th Rating
-      %th 
+      %th{:class => @date}
         %a{:href => '/movies/sort/date', :id => 'release_date_header'}Release Date
       %th More Info
   %tbody
